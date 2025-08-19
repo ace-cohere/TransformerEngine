@@ -195,6 +195,7 @@ def get_build_ext(
                         # Append -std=c++17 if not already in flags
                         if not any(flag.startswith("-std=") for flag in cflags):
                             cflags.append("-std=c++17")
+                            cflags.append("-Wno-c++11-narrowing")
 
                         return original_compile_fn(obj, src, ext, cc_args, cflags, pp_opts)
 
