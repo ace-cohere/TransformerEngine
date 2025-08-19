@@ -71,8 +71,6 @@ class CMakeExtension(setuptools.Extension):
         # CMake build and install commands
         build_command = [_cmake_bin, "--build", build_dir, "--verbose"]
         install_command = [_cmake_bin, "--install", build_dir, "--verbose"]
-        build_command += self.cmake_flags
-        install_command += self.cmake_flags
 
         # Check whether parallel build is restricted
         max_jobs = get_max_jobs_for_parallel_build()
@@ -81,6 +79,11 @@ class CMakeExtension(setuptools.Extension):
         build_command.append("--parallel")
         if max_jobs > 0:
             build_command.append(str(max_jobs))
+
+        build_command.append("--")
+        install_command.append("--")
+        build_command += self.cmake_flags
+        install_command += self.cmake_flags
 
         # Run CMake commands
         start_time = time.perf_counter()
