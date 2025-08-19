@@ -152,7 +152,9 @@ void KernelManager::compile(const std::string& kernel_label, const std::string& 
 #if NDEBUG == 0
       "-G",
 #endif
-      "--std=c++17"};
+      "--std=c++17",
+      "-Wno-c++11-narrowing",
+  };
   if (compile_ptx) {
     opts.push_back(concat_strings("--gpu-architecture=compute_", compile_sm_arch));
   } else {
